@@ -1,0 +1,65 @@
+{
+  "retrieved_at": "2026-10-06T13:15:16.327909+00:00",
+  "evidence_level": "Documentation and GitHub metadata review; no remote software builds or runtime tests executed",
+  "local_state": "Documentation-only project; no initial commit",
+  "repositories": [
+    {
+      "repo": "policylabs/ampel",
+      "archived": false,
+      "branch": "main",
+      "sha": "f669b35de3d7d1e00a980831aae0ec5cea8c8107",
+      "commit_date": "2026-10-04T19:58:14Z",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/policylabs/ampel/blob/main/LICENSE"
+    },
+    {
+      "repo": "conforma/cli",
+      "archived": false,
+      "branch": "main",
+      "sha": "d34d649f40e56f519f524b0ce356f8ba9f7e20e4",
+      "commit_date": "2026-10-05T21:02:11Z",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/conforma/cli/blob/main/LICENSE"
+    },
+    {
+      "repo": "open-policy-agent/opa",
+      "archived": false,
+      "branch": "main",
+      "sha": "d179cdae407338d768da168ad67105645774e521",
+      "commit_date": "2026-10-05T13:02:29Z",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/open-policy-agent/opa/blob/main/LICENSE"
+    },
+    {
+      "repo": "tektoncd/chains",
+      "archived": false,
+      "branch": "main",
+      "sha": "9565e57bc383791e8e9b745a9f771b1580c9aa12",
+      "commit_date": "2026-10-06T08:19:17Z",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/tektoncd/chains/blob/main/LICENSE"
+    },
+    {
+      "repo": "spinnaker/spinnaker",
+      "archived": false,
+      "branch": "main",
+      "sha": "2bd4d06d4b079021a5ecff1597e82bdd778a29d9",
+      "commit_date": "2026-10-06T04:51:56Z",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/spinnaker/spinnaker/blob/main/LICENSE"
+    },
+    {
+      "repo": "jenkinsci/pipeline-input-step-plugin",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "repo": "mindersec/minder",
+      "archived": false,
+      "branch": "main",
+      "sha": "a10fadc7591cf415eeb8905eefc0b08e96a7bf7f",
+      "commit_date": "2026-10-05T22:59:05Z",
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/mindersec/minder/blob/main/LICENSE"
+    }
+  ]
+}

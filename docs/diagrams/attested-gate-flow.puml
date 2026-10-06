@@ -1,0 +1,60 @@
+@startuml
+!pragma layout smetana
+title In-toto Attested Policy and Gate Flow - Vault / OpenBao
+hide footbox
+participant "Approved Git / Release CI" as CI
+participant "Vault / OpenBao Transit" as V
+participant "S3 / Artifactory" as S
+participant "PDP Loader / CEL" as P
+participant "Evidence / Governance" as E
+participant "CI/CD PEP" as C
+participant "Audit / Email Outbox" as A
+== Policy publication and periodic pickup ==
+CI -> CI: Validate approved commit; package CEL archive
+CI -> V: Sign DSSE PAE: provenance and release authorization
+V --> CI: Signatures with key versions
+CI -> S: Publish archive + both DSSE envelopes
+CI -> A: Durable publication event
+loop Configured polling interval
+P -> S: Fetch candidate archive and attestations
+P -> P: Locally verify public trust, issuer authority,\nsubject digest, validity and anti-rollback
+alt Candidate eligible
+P -> P: Validate CEL; atomically activate snapshot
+P -> A: Activation record and notification
+else Candidate invalid
+P -> A: Rejection reason and notification
+note over P: Retain eligible last-known-good only;\notherwise block protected gates
+end
+end
+== Evidence and bypass review ==
+note over E: Verify issuer-specific evidence attestations.\nSecurity Reviewer approves or denies bypass in UI.
+E -> V: Sign bypass-review statement for request revision
+V --> E: Signature
+E -> E: Persist issued attestation and live workflow status
+E -> A: Review event and interested-party email
+== Gate decision and enforcement ==
+C -> P: Authenticated subject/run/gate request
+P -> E: Verified evidence + bypass attestation + live status
+E --> P: Typed facts, digests and pending reviewer/team
+P -> P: Evaluate all applicable CEL rules
+P -> A: Persist immutable decision and detail digest
+P -> V: Sign gate-decision DSSE PAE
+alt Signing succeeds
+V --> P: Signature
+P -> A: Persist issued envelope and digest
+P --> C: DSSE decision: outcome, policy versions,\nrule results, pending ownership and detail digest
+C -> C: Verify signature/issuer, audience,\nsubject/run, expiry and replay binding
+alt Valid current PERMIT
+C -> C: Persist intent; perform protected action
+else DENY / PENDING / INDETERMINATE or invalid
+C -> C: Block protected action
+end
+C -> V: Sign enforcement-receipt PAE
+V --> C: Signature or signing failure
+C -> A: Deliver receipt; retain/retry on failure
+note over C,A: Receipt failure never reruns or rolls back an action.
+else Signing unavailable
+P --> C: Blocking service error; no unsigned permit
+C -> C: Block protected action
+end
+@enduml
