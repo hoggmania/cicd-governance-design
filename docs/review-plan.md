@@ -1,6 +1,6 @@
 # Delivery and architecture review plan
 
-> **For Hermes:** Use subagent-driven-development when implementation is authorized; expand each work package into test-first tasks after the runtime and CI platform are selected. This update does not authorize implementation, commits, publication or security-setting changes.
+> **For Agent:** Use subagent-driven-development when implementation is authorized; expand each work package into test-first tasks after the runtime and CI platform are selected. This update does not authorize implementation, commits, publication or security-setting changes.
 
 **Goal:** Deliver a self-hosted, hierarchical CI/CD gate-governance service with verified CEL policies and explainable signed decisions.
 
